@@ -1,4 +1,4 @@
-import CryptoJS, { enc } from "crypto-js";
+import CryptoJS from "crypto-js";
 import arc from "@architect/functions";
 
 import {
