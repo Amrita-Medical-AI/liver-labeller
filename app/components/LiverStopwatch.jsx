@@ -56,7 +56,7 @@ return (
             <div className="relative flex h-16 w-full min-w-[min-content] flex-row items-center justify-center">
                 {liverTimer ? (
                     <div className="absolute text-center my-auto mr-5 flex w-full flex-row px-2 md:px-4 gap-5 ">
-                        <label className="text-xl md:text-2xl font-light pl-12">Liver</label>
+                        <label className="text-xl md:text-2xl pl-12">Liver</label>
                         <label className="text-xl md:text-2xl text-center w-full">
                             {" "}
                             {formatTime(liverEndTime)}
@@ -68,7 +68,7 @@ return (
                     </label>
                 )}
                 <div
-                    className={`absolute right-0 ml-4 h-8 w-8 rounded-full p-1 text-white ${
+                    className={`absolute right-0 mx-4 h-8 w-8 rounded-full p-1 text-white ${
                         isDisabled ? `bg-gray-400` : `bg-blue-400 hover:bg-blue-500 focus:bg-blue-300`
                     }`}
                 >
