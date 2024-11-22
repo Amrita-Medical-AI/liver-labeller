@@ -36,7 +36,7 @@ export async function getUser(request) {
   const user = await getUserById(userId);
   if (user) return user;
 
-  // let userdummmy = { id: 1 , org:"liver"};
+  // let userdummmy = { id: 1 , org:"liver"}; // dummy user
   // return userdummmy;
 
   throw await logout(request);

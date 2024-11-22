@@ -90,10 +90,6 @@ export async function getPatientById({ patientId, user }) {
     return null;
   }
 
-  const biopsyResult = await db.patient.get({ pk: patient.pk });
-  const cancer = biopsyResult.cancer;
-  const biopsy = biopsyResult.biopsy;
-
   if (!user) {
     throw new Error("User object is null.");
   }
@@ -109,8 +105,6 @@ export async function getPatientById({ patientId, user }) {
     mrd: await decryptString(encryption_key, patient.mrd),
     name: await decryptString(encryption_key, patient.name),
     date: patient.date,
-    cancer: cancer,
-    biopsy: biopsy,
   };
 }
 
@@ -128,9 +122,6 @@ export async function getPatientByMrd({ mrd, user }) {
   if (!patient) {
     return null;
   }
-  const biopsyResult = await db.patient.get({ pk: patient.pk });
-  const cancer = biopsyResult.cancer;
-  const biopsy = biopsyResult.biopsy;
 
   let encryption_key = user.encryption_key;
   if (!encryption_key) encryption_key = "Default";
@@ -142,9 +133,6 @@ export async function getPatientByMrd({ mrd, user }) {
     patientId: patient.pk,
     mrd: await decryptString(encryption_key, patient.mrd),
     name: await decryptString(encryption_key, patient.name),
-    doctor: await decryptString(encryption_key, patient.doctor),
     date: patient.date,
-    cancer: cancer,
-    biopsy: biopsy,
   };
 }

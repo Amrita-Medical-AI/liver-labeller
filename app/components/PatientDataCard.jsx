@@ -1,16 +1,7 @@
 import React from "react";
-import { Form } from "@remix-run/react";
 
 export default function PatientDataCard({ patient }) {
-  const { patientId, mrd, name, date, doctor, cancer, biopsy } = patient;
-
-  const [cancerValue, setCancerValue] = React.useState("");
-  const [biopsyValue, setBiopsyValue] = React.useState("");
-
-  React.useEffect(() => {
-    setCancerValue(cancer);
-    setBiopsyValue(biopsy);
-  }, [cancer, biopsy]);
+  const { patientId, mrd, name, date } = patient;
 
   return (
     <div className="mx-auto max-w-lg rounded-md bg-white p-4 shadow-lg">
@@ -38,10 +29,6 @@ export default function PatientDataCard({ patient }) {
             })}
           </span>
         </p>
-        <p className="text-gray-800">
-          <span className="font-bold">Doctor : </span>
-          <span>{doctor}</span>
-        </p>
       </div>
       <div className=" flex space-x-5">
         <button
@@ -57,45 +44,6 @@ export default function PatientDataCard({ patient }) {
           Copy MRD
         </button>
       </div>
-      <hr className="my-4" />
-      <div className="my-3 text-xl font-semibold"> Patient Report </div>
-      <Form method={"post"}>
-        <input type="hidden" name="intent" value={"biopsy"} />
-        <input type="hidden" name="patientId" value={patientId} />
-        <div className="my-1 p-2">
-          <label>
-            Cancer:
-            <select
-              className="my-1 w-full rounded border border-gray-300 p-2"
-              name="cancer"
-              value={cancerValue===undefined ?  "" : cancerValue}
-              onChange={(e) => setCancerValue(e.target.value)}
-            >
-              <option value="">Select...</option>
-              <option value="true">Yes - Cancer</option>
-              <option value="false">No - Not Cancer</option>
-              <option value=" ">No Data</option>
-            </select>
-          </label>
-        </div>
-        <div className="my-2 p-2">
-          <div>
-            Biopsy Report:
-            <textarea
-              className="my-1 w-full rounded border border-gray-300 p-2"
-              name="biopsy"
-              value={biopsyValue ? biopsyValue : ""}
-              onChange={(e) => setBiopsyValue(e.target.value)}
-            />
-          </div>
-        </div>
-        <button
-          className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700"
-          type="submit"
-        >
-          Submit
-        </button>
-      </Form>
     </div>
   );
 }
