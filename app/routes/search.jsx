@@ -7,12 +7,11 @@ import { updatePatientDetails } from "~/models/patient.server";
 import PatientDataCard from "../components/PatientDataCard";
 
 export const loader = async ({ request, params }) => {
-  return redirect("/");
-  // const user = await getUser(request);
-  // if (user.decryption_access == false) {
-  //   return redirect("/decrypt-auth");
-  // }
-  // return json({});
+  const user = await getUser(request);
+  if (user.decryption_access == false) {
+    return redirect("/decrypt-auth");
+  }
+  return json({});
 };
 
 export const action = async ({ request, params }) => {
@@ -53,29 +52,6 @@ export const action = async ({ request, params }) => {
     }
 
     return json({ patient });
-  }
-  if (formData.get("intent") == "biopsy") {
-    const biopsy = formData.get("biopsy");
-    const patientId = formData.get("patientId");
-    var cancer = formData.get("cancer");
-
-    if (cancer == "true") {
-      cancer = true;
-    }
-    else if (cancer == "false") {
-      cancer = false;
-    }
-
-    const updatedData = {
-      cancer: cancer,
-      biopsy: biopsy,
-    };
-    const newData = await updatePatientDetails({
-      patientId: patientId,
-      updatedData: updatedData,
-    });
-
-    return {}
   }
   return {}
 };
